@@ -52,4 +52,12 @@ class Model:
         return vicini_per_paese
 
     def get_nodi_visitabili(self, stato):
-        grafo = nx.dfs_tree(self.grafo, self.diz_stati[stato])
+        st = None
+        for s in self.lista_stati:
+            if s.StateNme == stato:
+                st = s
+
+        albero = nx.dfs_tree(self.grafo, st)
+        visitabili = list(albero.nodes)
+        visitabili.remove(st)  # Rimuovi lo stato stesso dalla lista
+        return visitabili

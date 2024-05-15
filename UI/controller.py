@@ -49,4 +49,4 @@ class Controller:
             self._view._txt_result.controls.append(ft.Text(f"{nodo}"))
         self._view.update_page()
 
-
+        s

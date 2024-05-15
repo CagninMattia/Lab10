@@ -40,7 +40,7 @@ class Model:
         return len(self.grafo.edges)
 
     def get_num_connessioni_paese(self):
-        gradi = dict(self.grafo.degree())
+        """gradi = dict(self.grafo.degree())
         # Creazione del dizionario dei vicini per ogni paese
         vicini_per_paese = {}
         for paese in self.lista_stati:
@@ -49,14 +49,20 @@ class Model:
                 if arco[0] == paese.CCode:
                     conta += 1
             vicini_per_paese[paese] = conta
+        return vicini_per_paese"""
+
+        vicini_per_paese = {}
+        for paese in self.lista_stati:
+            vicini = len(self.grafo[paese])
+            vicini_per_paese[paese] = vicini
         return vicini_per_paese
+
 
     def get_nodi_visitabili(self, stato):
         st = None
         for s in self.lista_stati:
             if s.StateNme == stato:
                 st = s
-
         albero = nx.dfs_tree(self.grafo, st)
         visitabili = list(albero.nodes)
         visitabili.remove(st)  # Rimuovi lo stato stesso dalla lista
